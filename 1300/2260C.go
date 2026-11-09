@@ -14,17 +14,13 @@ func main() {
 	fmt.Fscan(in, &t)
 	for ; t > 0; t-- {
 		var x, y int
-		step, i := 0, 0
 		fmt.Fscan(in, &x, &y)
-		for {
-			if x^y == x+y {
-				step = i
-				break
+		s := x + y
+		for i := 1 << 30; i >= 1; i >>= 1 {
+			if (s&i) != 0 && x >= i {
+				x -= i
 			}
-			x--
-			y++
-			i++
 		}
-		fmt.Fprintln(out, x+y, step)
+		fmt.Fprintln(out, s, x)
 	}
 }
